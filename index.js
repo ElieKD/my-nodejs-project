@@ -13,6 +13,19 @@ axios.get('https://jsonplaceholder.typicode.com/posts')
         console.error('Error fetching data:', error);
     });
 
+
+async function fetchData() {
+    try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        console.log(response.data);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+fetchData();
+
+
 const PORT = 3000;
 server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}/`);
