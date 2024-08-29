@@ -3,6 +3,8 @@ const handleRequest = require('./requestHandler');
 
 const server = http.createServer(handleRequest);
 
+const myEmitter = require('./eventEmitter');
+
 const axios = require('axios');
 
 axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -26,7 +28,13 @@ async function fetchData() {
 fetchData();
 
 
+// Listen for the 'requestReceived' event
+myEmitter.on('requestReceived', (req) => {
+    console.log(`Received a ${req.method} request for: ${req.url}`);
+});
+
 const PORT = 3000;
 server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}/`);
 });
+
